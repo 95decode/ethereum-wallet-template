@@ -1,46 +1,50 @@
-# Getting Started with Create React App
+# Wallet Example (React, Typescript, Ethers, NextJS, Cosmos)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This example aims to demonstrate basic and advanced use cases enabled by WalletConnect's Sign SDK.
 
-## Available Scripts
+**The wallet implements Sign v1 and v2 side-by-side**, to serve as a reference for wallet developers
+aiming to support both major versions for backwards compatibility. **All files containing code for the legacy
+v1 implementation are prefixed with `Legacy...`.**
 
-In the project directory, you can run:
+Please only use this for reference and development purposes, otherwise you are at risk of losing your funds.
 
-### `npm start`
+# Useful links
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+🔗 Live wallet app - https://react-wallet.walletconnect.com <br />
+🔗 Live dapp - https://react-app.walletconnect.com <br />
+📚 WalletConnect docs - https://docs.walletconnect.com/2.0
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Getting started
 
-### `npm test`
+Example is built atop of [NextJS](https://nextjs.org/) in order to abstract complexity of setting up bundlers, routing etc. So there are few steps you need to follow in order to set everything up
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Go to [WalletConnect Cloud](https://cloud.walletconnect.com/sign-in) and obtain a project id
 
-### `npm run build`
+2. Add your project details in [WalletConnectUtil.ts](https://github.com/WalletConnect/web-examples/blob/main/wallets/react-wallet-v2/src/utils/WalletConnectUtil.ts) file
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. Install dependencies `yarn install` or `npm install`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4. Setup your environment variables
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+cp .env.local.example .env.local
+```
 
-### `npm run eject`
+Your `.env.local` now contains the following environment variables:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- `NEXT_PUBLIC_PROJECT_ID` (placeholder) - You can generate your own ProjectId at https://cloud.walletconnect.com
+- `NEXT_PUBLIC_RELAY_URL` (already set)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+5. Run `yarn dev` or `npm run dev` to start local development
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Navigating through example
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+1. Initial setup and initializations happen in [_app.ts](https://github.com/WalletConnect/web-examples/blob/main/wallets/react-wallet-v2/src/pages/_app.tsx) file
+2. WalletConnect client, ethers and cosmos wallets are initialized in [useInitialization.ts ](https://github.com/WalletConnect/web-examples/blob/main/wallets/react-wallet-v2/src/hooks/useInitialization.ts) hook
+3. Subscription and handling of WalletConnect events happens in [useWalletConnectEventsManager.ts](https://github.com/WalletConnect/web-examples/blob/main/wallets/react-wallet-v2/src/hooks/useWalletConnectEventsManager.ts) hook, that opens related [Modal views](https://github.com/WalletConnect/web-examples/tree/main/wallets/react-wallet-v2/src/views) and passes them all necessary data
+4. [Modal views](https://github.com/WalletConnect/web-examples/tree/main/wallets/react-wallet-v2/src/views) are responsible for data display and handling approval or rejection actions
+5. Upon approval or rejection, modals pass the request data to [RequestHandlerUtil.ts](https://github.com/WalletConnect/web-examples/blob/main/wallets/react-wallet-v2/src/utils/RequestHandlerUtil.ts) that performs all necessary work based on the request method and returns formated json rpc result data that can be then used for WalletConnect client responses
 
-## Learn More
+## Preview of wallet and dapp examples in action
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+https://user-images.githubusercontent.com/3154053/156764521-3492c232-7a93-47ba-88bd-2cee3f8366d4.mp4
