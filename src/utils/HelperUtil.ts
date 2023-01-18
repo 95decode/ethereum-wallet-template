@@ -1,9 +1,4 @@
-import { COSMOS_MAINNET_CHAINS, TCosmosChain } from '@/data/COSMOSData'
 import { EIP155_CHAINS, TEIP155Chain } from '@/data/EIP155Data'
-import { NEAR_TEST_CHAINS, TNearChain } from '@/data/NEARData'
-import { SOLANA_CHAINS, TSolanaChain } from '@/data/SolanaData'
-import { ELROND_CHAINS, TElrondChain } from '@/data/ElrondData'
-import { TRON_CHAINS, TTronChain } from '@/data/TronData'
 import { utils } from 'ethers'
 
 /**
@@ -84,58 +79,11 @@ export function isEIP155Chain(chain: string) {
 }
 
 /**
- * Check if chain is part of COSMOS standard
- */
-export function isCosmosChain(chain: string) {
-  return chain.includes('cosmos')
-}
-
-/**
- * Check if chain is part of SOLANA standard
- */
-export function isSolanaChain(chain: string) {
-  return chain.includes('solana')
-}
-
-/**
- * Check if chain is part of POLKADOT standard
- */
-export function isPolkadotChain(chain: string) {
-  return chain.includes('polkadot')
-}
-
-/**
- * Check if chain is part of NEAR standard
- */
-export function isNearChain(chain: string) {
-  return chain.includes('near')
-}
-
-/**
- * Check if chain is part of ELROND standard
- */
-export function isElrondChain(chain: string) {
-  return chain.includes('elrond')
-}
-
-/**
- * Check if chain is part of TRON standard
- */
- export function isTronChain(chain: string) {
-  return chain.includes('tron')
-}
-
-/**
  * Formats chainId to its name
  */
 export function formatChainName(chainId: string) {
   return (
     EIP155_CHAINS[chainId as TEIP155Chain]?.name ??
-    COSMOS_MAINNET_CHAINS[chainId as TCosmosChain]?.name ??
-    SOLANA_CHAINS[chainId as TSolanaChain]?.name ??
-    NEAR_TEST_CHAINS[chainId as TNearChain]?.name ??
-    ELROND_CHAINS[chainId as TElrondChain]?.name ??
-    TRON_CHAINS[chainId as TTronChain]?.name ??
     chainId
   )
 }

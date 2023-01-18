@@ -37,7 +37,7 @@ export function createOrRestoreEIP155Wallet() {
   eip155Addresses = Object.keys(eip155Wallets)
 
   //for test
-  eip155Addresses = ["0x3cF107EeDF65A4c51ec3DCc764174d64C9194800", "0x12D0279FE61B95f6e985D6292aDd45293709a038"]
+  //eip155Addresses = ["0x3cF107EeDF65A4c51ec3DCc764174d64C9194800", "0x12D0279FE61B95f6e985D6292aDd45293709a038"]
 
   return {
     eip155Wallets,

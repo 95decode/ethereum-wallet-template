@@ -7,12 +7,6 @@ interface State {
   testNets: boolean
   account: number
   eip155Address: string
-  cosmosAddress: string
-  solanaAddress: string
-  polkadotAddress: string
-  nearAddress: string
-  elrondAddress: string
-  tronAddress: string
   relayerRegionURL: string
 }
 
@@ -23,12 +17,6 @@ const state = proxy<State>({
   testNets: typeof localStorage !== 'undefined' ? Boolean(localStorage.getItem('TEST_NETS')) : true,
   account: 0,
   eip155Address: '',
-  cosmosAddress: '',
-  solanaAddress: '',
-  polkadotAddress: '',
-  nearAddress: '',
-  elrondAddress: '',
-  tronAddress: '',
   relayerRegionURL: ''
 })
 
@@ -46,30 +34,8 @@ const SettingsStore = {
     state.eip155Address = eip155Address
   },
 
-  setCosmosAddress(cosmosAddresses: string) {
-    state.cosmosAddress = cosmosAddresses
-  },
-
-  setSolanaAddress(solanaAddress: string) {
-    state.solanaAddress = solanaAddress
-  },
-
-  setPolkadotAddress(polkadotAddress: string) {
-    state.polkadotAddress = polkadotAddress
-  },
-  setNearAddress(nearAddress: string) {
-    state.nearAddress = nearAddress
-  },
   setRelayerRegionURL(relayerRegionURL: string) {
     state.relayerRegionURL = relayerRegionURL
-  },
-
-  setElrondAddress(elrondAddress: string) {
-    state.elrondAddress = elrondAddress
-  },
-
-  setTronAddress(tronAddress: string) {
-    state.tronAddress = tronAddress
   },
 
   toggleTestNets() {

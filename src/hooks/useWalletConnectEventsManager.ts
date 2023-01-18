@@ -1,15 +1,8 @@
-import { COSMOS_SIGNING_METHODS } from '@/data/COSMOSData'
 import { EIP155_SIGNING_METHODS } from '@/data/EIP155Data'
-import { SOLANA_SIGNING_METHODS } from '@/data/SolanaData'
-import { POLKADOT_SIGNING_METHODS } from '@/data/PolkadotData'
-import { ELROND_SIGNING_METHODS } from '@/data/ElrondData'
-import { TRON_SIGNING_METHODS } from '@/data/TronData'
 import ModalStore from '@/store/ModalStore'
 import { signClient } from '@/utils/WalletConnectUtil'
 import { SignClientTypes } from '@walletconnect/types'
 import { useCallback, useEffect } from 'react'
-import { NEAR_SIGNING_METHODS } from '@/data/NEARData'
-import { approveNearRequest } from '@/utils/NearRequestHandlerUtil'
 
 export default function useWalletConnectEventsManager(initialized: boolean) {
   /******************************************************************************
@@ -46,41 +39,6 @@ export default function useWalletConnectEventsManager(initialized: boolean) {
         case EIP155_SIGNING_METHODS.ETH_SIGN_TRANSACTION:
           return ModalStore.open('SessionSendTransactionModal', { requestEvent, requestSession })
 
-        case COSMOS_SIGNING_METHODS.COSMOS_SIGN_DIRECT:
-        case COSMOS_SIGNING_METHODS.COSMOS_SIGN_AMINO:
-          return ModalStore.open('SessionSignCosmosModal', { requestEvent, requestSession })
-
-        case SOLANA_SIGNING_METHODS.SOLANA_SIGN_MESSAGE:
-        case SOLANA_SIGNING_METHODS.SOLANA_SIGN_TRANSACTION:
-          return ModalStore.open('SessionSignSolanaModal', { requestEvent, requestSession })
-
-        case POLKADOT_SIGNING_METHODS.POLKADOT_SIGN_MESSAGE:
-        case POLKADOT_SIGNING_METHODS.POLKADOT_SIGN_TRANSACTION:
-          return ModalStore.open('SessionSignPolkadotModal', { requestEvent, requestSession })
-
-        case NEAR_SIGNING_METHODS.NEAR_SIGN_IN:
-        case NEAR_SIGNING_METHODS.NEAR_SIGN_OUT:
-        case NEAR_SIGNING_METHODS.NEAR_SIGN_TRANSACTION:
-        case NEAR_SIGNING_METHODS.NEAR_SIGN_AND_SEND_TRANSACTION:
-        case NEAR_SIGNING_METHODS.NEAR_SIGN_TRANSACTIONS:
-        case NEAR_SIGNING_METHODS.NEAR_SIGN_AND_SEND_TRANSACTIONS:
-        case NEAR_SIGNING_METHODS.NEAR_VERIFY_OWNER:
-          return ModalStore.open('SessionSignNearModal', { requestEvent, requestSession })
-
-        case ELROND_SIGNING_METHODS.ELROND_SIGN_MESSAGE:
-        case ELROND_SIGNING_METHODS.ELROND_SIGN_TRANSACTION:
-        case ELROND_SIGNING_METHODS.ELROND_SIGN_TRANSACTIONS:
-        case ELROND_SIGNING_METHODS.ELROND_SIGN_LOGIN_TOKEN:
-          return ModalStore.open('SessionSignElrondModal', { requestEvent, requestSession })
-
-        case NEAR_SIGNING_METHODS.NEAR_GET_ACCOUNTS:
-          return signClient.respond({
-            topic,
-            response: await approveNearRequest(requestEvent)
-          })
-        case TRON_SIGNING_METHODS.TRON_SIGN_MESSAGE:
-        case TRON_SIGNING_METHODS.TRON_SIGN_TRANSACTION:
-          return ModalStore.open('SessionSignTronModal', { requestEvent, requestSession })
         default:
           return ModalStore.open('SessionUnsuportedMethodModal', { requestEvent, requestSession })
       }

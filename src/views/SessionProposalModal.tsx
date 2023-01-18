@@ -3,27 +3,15 @@ import ProposalSelectSection from '@/components/ProposalSelectSection'
 import RequestModalContainer from '@/components/RequestModalContainer'
 import SessionProposalChainCard from '@/components/SessionProposalChainCard'
 import ModalStore from '@/store/ModalStore'
-import { cosmosAddresses } from '@/utils/CosmosWalletUtil'
 import { eip155Addresses } from '@/utils/EIP155WalletUtil'
-import { polkadotAddresses } from '@/utils/PolkadotWalletUtil'
-import { elrondAddresses } from '@/utils/ElrondWalletUtil'
-import { tronAddresses } from '@/utils/TronWalletUtil'
 import {
-  isCosmosChain,
   isEIP155Chain,
-  isSolanaChain,
-  isPolkadotChain,
-  isNearChain,
-  isElrondChain,
-  isTronChain
 } from '@/utils/HelperUtil'
-import { solanaAddresses } from '@/utils/SolanaWalletUtil'
 import { signClient } from '@/utils/WalletConnectUtil'
 import { Button, Divider, Modal, Text } from '@nextui-org/react'
 import { SessionTypes } from '@walletconnect/types'
 import { getSdkError } from '@walletconnect/utils'
 import { Fragment, useState } from 'react'
-import { nearAddresses } from '@/utils/NearWalletUtil'
 
 export default function SessionProposalModal() {
   const [selectedAccounts, setSelectedAccounts] = useState<Record<string, string[]>>({})
@@ -106,61 +94,7 @@ export default function SessionProposalModal() {
           chain={chain}
         />
       )
-    } else if (isCosmosChain(chain)) {
-      return (
-        <ProposalSelectSection
-          addresses={cosmosAddresses}
-          selectedAddresses={selectedAccounts[chain]}
-          onSelect={onSelectAccount}
-          chain={chain}
-        />
-      )
-    } else if (isSolanaChain(chain)) {
-      return (
-        <ProposalSelectSection
-          addresses={solanaAddresses}
-          selectedAddresses={selectedAccounts[chain]}
-          onSelect={onSelectAccount}
-          chain={chain}
-        />
-      )
-    } else if (isPolkadotChain(chain)) {
-      return (
-        <ProposalSelectSection
-          addresses={polkadotAddresses}
-          selectedAddresses={selectedAccounts[chain]}
-          onSelect={onSelectAccount}
-          chain={chain}
-        />
-      )
-    } else if (isNearChain(chain)) {
-      return (
-        <ProposalSelectSection
-          addresses={nearAddresses}
-          selectedAddresses={selectedAccounts[chain]}
-          onSelect={onSelectAccount}
-          chain={chain}
-        />
-      )
-    } else if (isElrondChain(chain)) {
-      return (
-        <ProposalSelectSection
-          addresses={elrondAddresses}
-          selectedAddresses={selectedAccounts[chain]}
-          onSelect={onSelectAccount}
-          chain={chain}
-        />
-      )
-    } else if (isTronChain(chain)) {
-      return (
-        <ProposalSelectSection
-          addresses={tronAddresses}
-          selectedAddresses={selectedAccounts[chain]}
-          onSelect={onSelectAccount}
-          chain={chain}
-        />
-      )
-    }
+    } 
   }
 
   return (
