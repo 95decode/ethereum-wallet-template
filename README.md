@@ -1,6 +1,6 @@
 # Ethereum Wallet Connect Example wallet app
 
-Wallet app template
+This is a sample wallet with all other networks except ethereum deleted because the existing wallet connect wallet sample is very heavy.
 
 ## Getting started
 
